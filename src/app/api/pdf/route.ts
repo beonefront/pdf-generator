@@ -5,7 +5,10 @@ export async function POST(req: NextRequest) {
   try {
     const { url, html } = await req.json() as { url?: string; html?: string };
 
-    const browser = await chromium.launch();
+    const browser = await chromium.launch({
+      args: ['--no-sandbox','--disable-setuid-sandbox'],
+      headless: true,
+    });
     const page = await browser.newPage();
 
     // Set color scheme and media type to match browser rendering
@@ -157,3 +160,4 @@ export async function POST(req: NextRequest) {
 }
 
 export const runtime = 'nodejs';
+export const maxDuration = 60;
