@@ -1,17 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { chromium } from 'playwright';
+import { chromium } from 'playwright-core';
 
-export const runtime = 'nodejs';
-export const maxDuration = 60;
+// import { chromium } from 'playwright';
+// export const runtime = 'nodejs';
+// export const maxDuration = 180;
 
 export async function POST(req: NextRequest) {
   try {
     const { url, html } = await req.json() as { url?: string; html?: string };
 
-    const browser = await chromium.launch({
-    headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
-  });
+    // const browser = await chromium.launch({
+    //   headless: true,
+    //   args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    // });
+
+    const browser = await chromium.connectOverCDP(process.env.BROWSERLESS_WS!);
 
     const page = await browser.newPage();
 

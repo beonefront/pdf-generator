@@ -26,6 +26,9 @@ importers:
       playwright:
         specifier: ^1.55.0
         version: 1.55.0
+      playwright-core:
+        specifier: ^1.55.0
+        version: 1.55.0
       react:
         specifier: 19.1.0
         version: 19.1.0
