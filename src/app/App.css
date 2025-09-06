@@ -35,7 +35,6 @@ body {
 .divider {
   background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
   position: relative;
-  cursor: col-resize;
 }
 
 .divider::before {
