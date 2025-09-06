@@ -1,14 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { chromium } from 'playwright';
 
+export const runtime = 'nodejs';
+export const maxDuration = 60;
+
 export async function POST(req: NextRequest) {
   try {
     const { url, html } = await req.json() as { url?: string; html?: string };
 
     const browser = await chromium.launch({
-      args: ['--no-sandbox','--disable-setuid-sandbox'],
-      headless: true,
-    });
+    headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  });
+
     const page = await browser.newPage();
 
     // Set color scheme and media type to match browser rendering
@@ -158,6 +162,3 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Failed to generate PDF' }, { status: 500 });
   }
 }
-
-export const runtime = 'nodejs';
-export const maxDuration = 60;
